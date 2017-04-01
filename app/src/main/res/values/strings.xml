@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">茉莉豆</string>
+    <string name="btn_open">芝麻開門</string>
+    <string name="btn_close">關門</string>
+</resources>
