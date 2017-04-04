@@ -103,11 +103,11 @@ public class MainActivity extends AppCompatActivity {
     private Runnable multicastSend = new Runnable() {
         @Override
         public void run() {
-              try {
-                  s.send(dgramPacket);
-              } catch(IOException e) {
+            try {
+                s.send(dgramPacket);
+            } catch(IOException e) {
 
-              }
+            }
         }
     };
 }
