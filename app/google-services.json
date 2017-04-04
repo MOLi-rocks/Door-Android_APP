@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "10676976194",
+    "firebase_url": "https://moli-door.firebaseio.com",
+    "project_id": "moli-door",
+    "storage_bucket": "moli-door.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:10676976194:android:e40e5159393007b0",
+        "android_client_info": {
+          "package_name": "com.yy.molidoor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "10676976194-6dpgqiftsld3egaprroil2p1pcekm5b4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsjNIgxCNTMabwIbiSPNaQ02HJAskQXL0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
