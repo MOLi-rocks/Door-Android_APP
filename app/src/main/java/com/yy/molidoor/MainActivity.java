@@ -33,22 +33,25 @@ public class MainActivity extends AppCompatActivity {
 
     DatabaseReference status = FirebaseDatabase.getInstance().getReference("status");
 
-    TextView doorstatustext = (TextView) findViewById(R.id.doorstatustext);
+    TextView doorstatustextbox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        doorstatustextbox = (TextView) findViewById(R.id.doorstatustext);
         status.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 int doorstatus= snapshot.getValue(int.class);
                 Log.d(TAG, "Value is: " + doorstatus);
                 if (doorstatus == 1) {
-                    doorstatustext.setText("MOLi 現在 關門中！");
+                    doorstatustextbox.setText("MOLi 現在 關門中！");
                 } else if (doorstatus == 0) {
-                    doorstatustext.setText("MOLi 現在 開門中！");
+                    doorstatustextbox.setText("MOLi 現在 開門中！");
                 } else {
-                    doorstatustext.setText("狀態不明<br>猴子們正在努力找出問題");
+                    doorstatustextbox.setText("狀態不明\n猴子們正在努力找出問題");
                 }
             }
 
@@ -56,11 +59,10 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException());
-                doorstatustext.setText("狀態不明<br>猴子們正在努力找出問題");
+                doorstatustextbox.setText("狀態不明\n猴子們正在努力找出問題");
             }
         });
 
-        setContentView(R.layout.activity_main);
         // send
         sendThread = new HandlerThread("multicasrSend");
         sendThread.start();
