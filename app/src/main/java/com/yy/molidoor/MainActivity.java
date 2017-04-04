@@ -78,8 +78,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setDoor(String action) {
-        Toast t = Toast.makeText(MainActivity.this, action, Toast.LENGTH_LONG);
-        t.show();
+        ToastUtile.showText(MainActivity.this, action);
+        //Toast t = Toast.makeText(MainActivity.this, action, Toast.LENGTH_LONG);
+        //t.show();
 
         WifiManager wifi = (WifiManager)getSystemService(Context.WIFI_SERVICE);
         if (wifi != null){
@@ -110,4 +111,19 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
+    private static class ToastUtile {
+        private static Toast toast = null;
+
+        /**
+         * 顯示Toast
+         */
+        public static void showText(Context context, String text) {
+            if (toast == null) {
+                toast = Toast.makeText(context, "", Toast.LENGTH_SHORT);
+            }
+            toast.setText(text);
+            toast.show();
+        }
+    }
 }
