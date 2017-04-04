@@ -6,8 +6,16 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -21,9 +29,37 @@ public class MainActivity extends AppCompatActivity {
     HandlerThread sendThread;
     Handler sendHnadler;
 
+    private static final String TAG = "MainActivity";
+
+    DatabaseReference status = FirebaseDatabase.getInstance().getReference("status");
+
+    TextView doorstatustext = (TextView) findViewById(R.id.doorstatustext);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        status.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                int doorstatus= snapshot.getValue(int.class);
+                Log.d(TAG, "Value is: " + doorstatus);
+                if (doorstatus == 1) {
+                    doorstatustext.setText("MOLi 現在 關門中！");
+                } else if (doorstatus == 0) {
+                    doorstatustext.setText("MOLi 現在 開門中！");
+                } else {
+                    doorstatustext.setText("狀態不明<br>猴子們正在努力找出問題");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+                doorstatustext.setText("狀態不明<br>猴子們正在努力找出問題");
+            }
+        });
+
         setContentView(R.layout.activity_main);
         // send
         sendThread = new HandlerThread("multicasrSend");
